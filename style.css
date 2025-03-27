@@ -45,7 +45,7 @@
     --dark-gradient: linear-gradient(180deg, #040918 0%, #091540 100%);
 }
 body{
-    background-color:var(--lightestttt-gray) ;
+    background-color:var(--lightestttt-gray);
     font-family: "Noto Sans", sans-serif;
     transition: .4s;
 }
