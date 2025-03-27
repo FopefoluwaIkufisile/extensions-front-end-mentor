@@ -79,15 +79,6 @@ const extensionsArray = [
   },
 ];
 
-const test = extensionsArray.filter((extension) => extension.isActive);
-// console.log(test)
-
-const test2 = extensionsArray.map((extension)=>{
-    return {
-        ...extension,
-        description: extension.description.length > 50 ? extension.description.substring(0,50) + "..." : extension.description
-    }
-})
 // console.log(test2)
 
 const all = document.getElementById("all");
@@ -97,164 +88,183 @@ const theme = document.querySelector(".theme");
 const ext = document.getElementById("ext");
 
 theme.addEventListener("click", () => {
-    document.body.classList.toggle("dark");
-  ext.classList.toggle("ext")
-    ext.classList.toggle("show")
+  document.body.classList.toggle("dark");
+  ext.classList.toggle("ext");
+  ext.classList.toggle("show");
 });
-
-
-
-
-const extensions =  document.getElementById("extensions");
+const extensions = document.getElementById("extensions");
+const activeExtensions = extensionsArray.filter(
+  (extension) => extension.isActive
+);
+const inactiveExtensions = extensionsArray.filter(
+  (extension) => !extension.isActive
+);
 
 all.addEventListener("click", () => {
-    // Clear the existing extensions
-    extensions.innerHTML = "";
-    extensionsArray.map((extension, index) => {
-        const extensiondiv = document.createElement("div");
-        extensiondiv.classList.add("extension");
-        extensiondiv.innerHTML = `
-            <div class="extension-info">
-              <div class="icon">
-                <img src="${extension.logo}" alt="" />
-              </div>
-              <div class="icon-text">
-                <h3>${extension.name}</h3>
-                <p>${extension.description}</p>
-              </div>
-            </div>
-            <div class="button-and-toggle">
-              <button class="btn remove">Remove</button>
-              <label class="switch">
-                <input type="checkbox" ${extension.isActive ? 'checked' : ''} data-index="${index}" />
-                <span class="slider round"></span>
-              </label>
-            </div>
-        `;
-        
-        const checkbox = extensiondiv.querySelector('input[type="checkbox"]');
-        
-        // Add event listener to checkbox to update isActive
-        checkbox.addEventListener("change", (e) => {
-            const index = e.target.getAttribute("data-index");
-            extensionsArray[index].isActive = e.target.checked;
-            console.log(`Extension: ${extensionsArray[index].name} isActive: ${extensionsArray[index].isActive}`);
-        });
-        
-        extensions.appendChild(extensiondiv);
-    });
-});
+  extensions.innerHTML = "";
+  extensions.innerHTML = extensionsArray
+    .map(
+      (extension, index) => `
+  <div class="extension">
+      <div class="extension-info">
+          <div class="icon">
+              <img src="${extension.logo}" alt="" />
+          </div>
+          <div class="icon-text">
+              <h3>${extension.name}</h3>
+              <p>${extension.description}</p>
+          </div>
+      </div>
+      <div class="button-and-toggle">
+          <button class="btn remove">Remove</button>
+          <label class="switch">
+              <input type="checkbox" ${
+                extension.isActive ? "checked" : ""
+              } data-index="${index}" />
+              <span class="slider round"></span>
+          </label>
+      </div>
+  </div>
+`
+    )
+    .join("");
 
-active.addEventListener("click", () => {
-    // Clear the existing extensions
-    extensions.innerHTML = "";
-    extensionsArray.filter((extension) => extension.isActive).map((extension, index) => {
-        const extensiondiv = document.createElement("div");
-        extensiondiv.classList.add("extension");
-        extensiondiv.innerHTML = `
-            <div class="extension-info">
-              <div class="icon">
-                <img src="${extension.logo}" alt="" />
-              </div>
-              <div class="icon-text">
-                <h3>${extension.name}</h3>
-                <p>${extension.description}</p>
-              </div>
-            </div>
-            <div class="button-and-toggle">
-              <button class="btn remove">Remove</button>
-              <label class="switch">
-                <input type="checkbox" ${extension.isActive ? 'checked' : ''} data-index="${index}" />
-                <span class="slider round"></span>
-              </label>
-            </div>
-        `;
-        
-        const checkbox = extensiondiv.querySelector('input[type="checkbox"]');
-        
-        // Add event listener to checkbox to update isActive
-        checkbox.addEventListener("change", (e) => {
-            const index = e.target.getAttribute("data-index");
-            extensionsArray[index].isActive = e.target.checked;
-            console.log(`Extension: ${extensionsArray[index].name} isActive: ${extensionsArray[index].isActive}`);
-        });
-        
-        extensions.appendChild(extensiondiv);
+  // Add event listeners after rendering
+  document
+    .querySelectorAll('.extension input[type="checkbox"]')
+    .forEach((checkbox) => {
+      checkbox.addEventListener("change", (e) => {
+        const index = e.target.getAttribute("data-index");
+        extensionsArray[index].isActive = e.target.checked;
+        console.log(
+          `Extension: ${extensionsArray[index].name} isActive: ${extensionsArray[index].isActive}`
+        );
+      });
     });
 });
 
 inactive.addEventListener("click", () => {
-    // Clear the existing extensions
-    extensions.innerHTML = "";
-    extensionsArray.filter((extension) => !extension.isActive).map((extension, index) => {
-        const extensiondiv = document.createElement("div");
-        extensiondiv.classList.add("extension");
-        extensiondiv.innerHTML = `
-            <div class="extension-info">
-              <div class="icon">
-                <img src="${extension.logo}" alt="" />
-              </div>
-              <div class="icon-text">
-                <h3>${extension.name}</h3>
-                <p>${extension.description}</p>
-              </div>
-            </div>
-            <div class="button-and-toggle">
-              <button class="btn remove">Remove</button>
-              <label class="switch">
-                <input type="checkbox" ${extension.isActive ? 'checked' : ''} data-index="${index}" />
-                <span class="slider round"></span>
-              </label>
-            </div>
-        `;
-        
-        const checkbox = extensiondiv.querySelector('input[type="checkbox"]');
-        
-        // Add event listener to checkbox to update isActive
-        checkbox.addEventListener("change", (e) => {
-            const index = e.target.getAttribute("data-index");
-            extensionsArray[index].isActive = e.target.checked;
-            console.log(`Extension: ${extensionsArray[index].name} isActive: ${extensionsArray[index].isActive}`);
-        });
-        
-        extensions.appendChild(extensiondiv);
-    });
-});
-
-
-// Initial rendering of extensions on mount
-extensionsArray.map((extension, index) => {
-    const extensiondiv = document.createElement("div");
-    extensiondiv.classList.add("extension");
-    extensiondiv.innerHTML = `
-        <div class="extension-info">
+  extensions.innerHTML = "";
+  extensions.innerHTML = inactiveExtensions
+    .map(
+      (extension, index) => `
+  <div class="extension">
+      <div class="extension-info">
           <div class="icon">
-            <img src="${extension.logo}" alt="" />
+              <img src="${extension.logo}" alt="" />
           </div>
           <div class="icon-text">
-            <h3>${extension.name}</h3>
-            <p>${extension.description}</p>
+              <h3>${extension.name}</h3>
+              <p>${extension.description}</p>
           </div>
-        </div>
-        <div class="button-and-toggle">
+      </div>
+      <div class="button-and-toggle">
           <button class="btn remove">Remove</button>
           <label class="switch">
-            <input type="checkbox" ${extension.isActive ? 'checked' : ''} data-index="${index}" />
-            <span class="slider round"></span>
+              <input type="checkbox" ${
+                extension.isActive ? "checked" : ""
+              } data-index="${index}" />
+              <span class="slider round"></span>
           </label>
-        </div>
-    `;
+      </div>
+  </div>
+`
+    )
+    .join("");
 
-    // Get the checkbox element
-    const checkbox = extensiondiv.querySelector('input[type="checkbox"]');
-
-    // Add event listener to update isActive property when checkbox changes
-    checkbox.addEventListener("change", (e) => {
+  // Add event listeners after rendering
+  document
+    .querySelectorAll('.extension input[type="checkbox"]')
+    .forEach((checkbox) => {
+      checkbox.addEventListener("change", (e) => {
         const index = e.target.getAttribute("data-index");
         extensionsArray[index].isActive = e.target.checked;
-        console.log(`Extension: ${extensionsArray[index].name} isActive: ${extensionsArray[index].isActive}`);
+        console.log(
+          `Extension: ${extensionsArray[index].name} isActive: ${extensionsArray[index].isActive}`
+        );
+      });
     });
-
-    // Append the extension to the extensions container
-    extensions.appendChild(extensiondiv);
 });
+
+active.addEventListener("click", () => {
+  extensions.innerHTML = "";
+  extensions.innerHTML = activeExtensions
+    .map(
+      (extension, index) => `
+  <div class="extension">
+      <div class="extension-info">
+          <div class="icon">
+              <img src="${extension.logo}" alt="" />
+          </div>
+          <div class="icon-text">
+              <h3>${extension.name}</h3>
+              <p>${extension.description}</p>
+          </div>
+      </div>
+      <div class="button-and-toggle">
+          <button class="btn remove">Remove</button>
+          <label class="switch">
+              <input type="checkbox" ${
+                extension.isActive ? "checked" : ""
+              } data-index="${index}" />
+              <span class="slider round"></span>
+          </label>
+      </div>
+  </div>
+`
+    )
+    .join("");
+
+  // Add event listeners after rendering
+  document
+    .querySelectorAll('.extension input[type="checkbox"]')
+    .forEach((checkbox) => {
+      checkbox.addEventListener("change", (e) => {
+        const index = e.target.getAttribute("data-index");
+        extensionsArray[index].isActive = e.target.checked;
+        console.log(
+          `Extension: ${extensionsArray[index].name} isActive: ${extensionsArray[index].isActive}`
+        );
+      });
+    });
+});
+
+extensions.innerHTML = extensionsArray
+  .map(
+    (extension, index) => `
+    <div class="extension">
+        <div class="extension-info">
+            <div class="icon">
+                <img src="${extension.logo}" alt="" />
+            </div>
+            <div class="icon-text">
+                <h3>${extension.name}</h3>
+                <p>${extension.description}</p>
+            </div>
+        </div>
+        <div class="button-and-toggle">
+            <button class="btn remove">Remove</button>
+            <label class="switch">
+                <input type="checkbox" ${
+                  extension.isActive ? "checked" : ""
+                } data-index="${index}" />
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </div>
+`
+  )
+  .join("");
+
+// Add event listeners after rendering
+document
+  .querySelectorAll('.extension input[type="checkbox"]')
+  .forEach((checkbox) => {
+    checkbox.addEventListener("change", (e) => {
+      const index = e.target.getAttribute("data-index");
+      extensionsArray[index].isActive = e.target.checked;
+      console.log(
+        `Extension: ${extensionsArray[index].name} isActive: ${extensionsArray[index].isActive}`
+      );
+    });
+  });
