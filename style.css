@@ -7,6 +7,11 @@
 .attribution a {
   color: hsl(228, 45%, 44%);
 }
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 :root{
     --deep-dark-gray:hsl(227, 75%, 14%);
@@ -24,41 +29,27 @@
     --dark-gradient: linear-gradient(180deg, #040918 0%, #091540 100%);
 
 }
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.dark{
+    --lightestt-gray:hsl(227, 75%, 14%);
+    --lightestttt-gray:hsl(226, 25%, 17%);
+    --gray:hsl(225, 23%, 24%);
+    --light-gray:hsl(226, 11%, 37%);
+    --lightest-gray:hsl(0, 0%, 78%);
+    --deep-dark-gray:hsl(217, 61%, 90%);
+    --lightesttt-gray:hsl(0, 0%, 93%);
+    --dark-gray:hsl(200, 60%, 99%);
+    --red-400:hsl(3, 86%, 64%);
+    --red-500:hsl(3, 71%, 56%);
+    --red-700:hsl(3, 77%, 44%);
+    --light-gradient: linear-gradient(180deg, #EBF2FC 0%, #EEF8F9 100%);
+    --dark-gradient: linear-gradient(180deg, #040918 0%, #091540 100%);
 }
 body{
     background-color:var(--lightestttt-gray) ;
     font-family: "Noto Sans", sans-serif;
-    transition: 0.4s;
-}
-body.dark{
-    background-color: var(--deep-dark-gray);
-    color: white;
+    transition: .4s;
 }
 
-body.dark #extension-list-header h2{
-    color: white;
-}
-body.dark header{
-    color: white;
-}
-body.dark .icon-and-text{
-    color: white;
-}
-
-.ext{
-    display: none;
-    position: absolute;
-    left: 0;
-}
-
-.show{
-    display: block;
-    color: white;
-}
 header{
     width: 100%;
     margin: 20px auto;
@@ -99,9 +90,6 @@ header{
 #extension-list-header h2{
     font-size: 1.7rem;
     color: var(--deep-dark-gray);
-}
-.darkh2{
-    color: white;
 }
 .btn{
     padding: 7px;

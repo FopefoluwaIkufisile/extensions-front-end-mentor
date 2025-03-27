@@ -85,12 +85,9 @@ const all = document.getElementById("all");
 const active = document.getElementById("active");
 const inactive = document.getElementById("inactive");
 const theme = document.querySelector(".theme");
-const ext = document.getElementById("ext");
 
 theme.addEventListener("click", () => {
   document.body.classList.toggle("dark");
-  ext.classList.toggle("ext");
-  ext.classList.toggle("show");
 });
 const extensions = document.getElementById("extensions");
 const activeExtensions = extensionsArray.filter(
