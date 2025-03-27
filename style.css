@@ -32,8 +32,33 @@
 body{
     background-color:var(--lightestttt-gray) ;
     font-family: "Noto Sans", sans-serif;
+    transition: 0.4s;
+}
+body.dark{
+    background-color: var(--deep-dark-gray);
+    color: white;
 }
 
+body.dark #extension-list-header h2{
+    color: white;
+}
+body.dark header{
+    color: white;
+}
+body.dark .icon-and-text{
+    color: white;
+}
+
+.ext{
+    display: none;
+    position: absolute;
+    left: 0;
+}
+
+.show{
+    display: block;
+    color: white;
+}
 header{
     width: 100%;
     margin: 20px auto;
@@ -50,6 +75,7 @@ header{
     display: flex;
     align-items: center;
     gap: 6px;
+    position: relative;
 }
 .theme{
     display: flex;
@@ -59,6 +85,7 @@ header{
     padding: 10px;
     background-color: var(--lightest-gray);
     border-radius: 10px;
+    cursor: pointer;
 }
 #extension-list-header{
     width: 100%;
@@ -72,6 +99,9 @@ header{
 #extension-list-header h2{
     font-size: 1.7rem;
     color: var(--deep-dark-gray);
+}
+.darkh2{
+    color: white;
 }
 .btn{
     padding: 7px;
