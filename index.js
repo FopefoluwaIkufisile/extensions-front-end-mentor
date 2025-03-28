@@ -79,7 +79,12 @@ const extensionsArray = [
   },
 ];
 
-// console.log(test2)
+document.querySelectorAll('.btn').forEach(button => {
+  button.addEventListener('click', function() {
+    document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
 
 const all = document.getElementById("all");
 const active = document.getElementById("active");
@@ -87,148 +92,24 @@ const inactive = document.getElementById("inactive");
 const theme = document.querySelector(".theme");
 
 theme.addEventListener("click", () => {
+  document.querySelector(".moon").classList.toggle("hide")
+  document.querySelector(".day").classList.toggle("hide")
   document.body.classList.toggle("dark");
 });
-const extensions = document.getElementById("extensions");
-const activeExtensions = extensionsArray.filter(
-  (extension) => extension.isActive
-);
-const inactiveExtensions = extensionsArray.filter(
-  (extension) => !extension.isActive
-);
 
-all.addEventListener("click", () => {
-  extensions.innerHTML = "";
-  extensions.innerHTML = extensionsArray
+function updateExtensionLists() {
+  const activeExtensions = extensionsArray.filter(extension => extension.isActive);
+  const inactiveExtensions = extensionsArray.filter(extension => !extension.isActive);
+
+  all.addEventListener("click", () => renderExtensions(extensionsArray));
+  active.addEventListener("click", () => renderExtensions(activeExtensions));
+  inactive.addEventListener("click", () => renderExtensions(inactiveExtensions));
+}
+
+function renderExtensions(extensionsToRender) {
+  extensions.innerHTML = extensionsToRender
     .map(
       (extension, index) => `
-  <div class="extension">
-      <div class="extension-info">
-          <div class="icon">
-              <img src="${extension.logo}" alt="" />
-          </div>
-          <div class="icon-text">
-              <h3>${extension.name}</h3>
-              <p>${extension.description}</p>
-          </div>
-      </div>
-      <div class="button-and-toggle">
-          <button class="btn remove">Remove</button>
-          <label class="switch">
-              <input type="checkbox" ${
-                extension.isActive ? "checked" : ""
-              } data-index="${index}" />
-              <span class="slider round"></span>
-          </label>
-      </div>
-  </div>
-`
-    )
-    .join("");
-
-  // Add event listeners after rendering
-  document
-    .querySelectorAll('.extension input[type="checkbox"]')
-    .forEach((checkbox) => {
-      checkbox.addEventListener("change", (e) => {
-        const index = e.target.getAttribute("data-index");
-        extensionsArray[index].isActive = e.target.checked;
-        console.log(
-          `Extension: ${extensionsArray[index].name} isActive: ${extensionsArray[index].isActive}`
-        );
-      });
-    });
-});
-
-inactive.addEventListener("click", () => {
-  extensions.innerHTML = "";
-  extensions.innerHTML = inactiveExtensions
-    .map(
-      (extension, index) => `
-  <div class="extension">
-      <div class="extension-info">
-          <div class="icon">
-              <img src="${extension.logo}" alt="" />
-          </div>
-          <div class="icon-text">
-              <h3>${extension.name}</h3>
-              <p>${extension.description}</p>
-          </div>
-      </div>
-      <div class="button-and-toggle">
-          <button class="btn remove">Remove</button>
-          <label class="switch">
-              <input type="checkbox" ${
-                extension.isActive ? "checked" : ""
-              } data-index="${index}" />
-              <span class="slider round"></span>
-          </label>
-      </div>
-  </div>
-`
-    )
-    .join("");
-
-  // Add event listeners after rendering
-  document
-    .querySelectorAll('.extension input[type="checkbox"]')
-    .forEach((checkbox) => {
-      checkbox.addEventListener("change", (e) => {
-        const index = e.target.getAttribute("data-index");
-        extensionsArray[index].isActive = e.target.checked;
-        console.log(
-          `Extension: ${extensionsArray[index].name} isActive: ${extensionsArray[index].isActive}`
-        );
-      });
-    });
-});
-
-active.addEventListener("click", () => {
-  extensions.innerHTML = "";
-  extensions.innerHTML = activeExtensions
-    .map(
-      (extension, index) => `
-  <div class="extension">
-      <div class="extension-info">
-          <div class="icon">
-              <img src="${extension.logo}" alt="" />
-          </div>
-          <div class="icon-text">
-              <h3>${extension.name}</h3>
-              <p>${extension.description}</p>
-          </div>
-      </div>
-      <div class="button-and-toggle">
-          <button class="btn remove">Remove</button>
-          <label class="switch">
-              <input type="checkbox" ${
-                extension.isActive ? "checked" : ""
-              } data-index="${index}" />
-              <span class="slider round"></span>
-          </label>
-      </div>
-  </div>
-`
-    )
-    .join("");
-
-  // Add event listeners after rendering
-  document
-    .querySelectorAll('.extension input[type="checkbox"]')
-    .forEach((checkbox) => {
-      checkbox.addEventListener("change", (e) => {
-        const index = e.target.getAttribute("data-index");
-        extensionsArray[index].isActive = e.target.checked;
-        console.log(
-          `Extension: ${extensionsArray[index].name} isActive: ${extensionsArray[index].isActive}`
-        );
-      });
-    });
-});
-
-extensions.innerHTML = extensionsArray
-  .map(
-    (extension, index) => `
     <div class="extension">
         <div class="extension-info">
             <div class="icon">
@@ -249,19 +130,25 @@ extensions.innerHTML = extensionsArray
             </label>
         </div>
     </div>
-`
-  )
-  .join("");
+  `
+    )
+    .join("");
 
-// Add event listeners after rendering
-document
-  .querySelectorAll('.extension input[type="checkbox"]')
-  .forEach((checkbox) => {
-    checkbox.addEventListener("change", (e) => {
-      const index = e.target.getAttribute("data-index");
-      extensionsArray[index].isActive = e.target.checked;
-      console.log(
-        `Extension: ${extensionsArray[index].name} isActive: ${extensionsArray[index].isActive}`
-      );
+  document
+    .querySelectorAll('.extension input[type="checkbox"]')
+    .forEach((checkbox) => {
+      checkbox.addEventListener("change", (e) => {
+        const index = e.target.getAttribute("data-index");
+        extensionsArray[index].isActive = e.target.checked;
+        console.log(
+          `Extension: ${extensionsArray[index].name} isActive: ${extensionsArray[index].isActive}`
+        );
+
+        updateExtensionLists();
+      });
     });
-  });
+}
+
+renderExtensions(extensionsArray);
+
+updateExtensionLists();

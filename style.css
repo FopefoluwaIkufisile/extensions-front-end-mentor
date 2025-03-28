@@ -1,56 +1,61 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 
 .attribution {
-  font-size: 11px;
-  text-align: center;
+    font-size: 11px;
+    text-align: center;
 }
 .attribution a {
-  color: hsl(228, 45%, 44%);
+    color: hsl(228, 45%, 44%);
 }
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-:root{
-    --deep-dark-gray:hsl(227, 75%, 14%);
-    --dark-gray:hsl(226, 25%, 17%);
-    --gray:hsl(225, 23%, 24%);
-    --light-gray:hsl(226, 11%, 37%);
-    --lightest-gray:hsl(0, 0%, 78%);
-    --lightestt-gray:hsl(217, 61%, 90%);
-    --lightesttt-gray:hsl(0, 0%, 93%);
-    --lightestttt-gray:hsl(200, 60%, 99%);
-    --red-400:hsl(3, 86%, 64%);
-    --red-500:hsl(3, 71%, 56%);
-    --red-700:hsl(3, 77%, 44%);
-    --light-gradient: linear-gradient(180deg, #EBF2FC 0%, #EEF8F9 100%);
+:root {
+    --deep-dark-gray: hsl(227, 75%, 14%);
+    --dark-gray: hsl(226, 25%, 17%);
+    --gray: hsl(225, 23%, 24%);
+    --light-gray: hsl(226, 11%, 37%);
+    --theme-icon: hsl(0, 0%, 78%);
+    --lightestt-gray: hsl(217, 61%, 90%);
+    --lightesttt-gray: hsl(0, 0%, 93%);
+    --header-color: hsl(200, 60%, 99%);
+    --red-400: hsl(3, 86%, 64%);
+    --red-500: hsl(3, 71%, 56%);
+    --red: hsl(3, 77%, 44%);
+    --bg-color: linear-gradient(180deg, #ebf2fc 0%, #eef8f9 100%);
     --dark-gradient: linear-gradient(180deg, #040918 0%, #091540 100%);
-
+    --pure: black
 }
-.dark{
-    --lightestt-gray:hsl(227, 75%, 14%);
-    --lightestttt-gray:hsl(226, 25%, 17%);
-    --gray:hsl(225, 23%, 24%);
-    --light-gray:hsl(226, 11%, 37%);
-    --lightest-gray:hsl(0, 0%, 78%);
-    --deep-dark-gray:hsl(217, 61%, 90%);
-    --lightesttt-gray:hsl(0, 0%, 93%);
-    --dark-gray:hsl(200, 60%, 99%);
-    --red-400:hsl(3, 86%, 64%);
-    --red-500:hsl(3, 71%, 56%);
-    --red-700:hsl(3, 77%, 44%);
-    --light-gradient: linear-gradient(180deg, #EBF2FC 0%, #EEF8F9 100%);
-    --dark-gradient: linear-gradient(180deg, #040918 0%, #091540 100%);
+.dark {
+    transition: all .4s linear;
+    --lightestt-gray: hsl(227, 75%, 14%);
+    --lightestttt-gray: hsl(225, 23%, 24%);
+    --header-color: hsl(226, 25%, 17%);
+    --light-gray: hsl(226, 11%, 37%);
+    --theme-icon: hsl(0, 0%, 78%);
+    --deep-dark-gray: white;
+    --lightesttt-gray: hsl(0, 0%, 93%);
+    --dark-gray: hsl(200, 60%, 99%);
+    --red-400: hsl(3, 86%, 64%);
+    --red: hsl(3, 71%, 56%);
+    --red-700: hsl(3, 77%, 44%);
+    --bg-color: linear-gradient(180deg, #040918 0%, #091540 100%);
+    --pure:white;
 }
-body{
-    background-color:var(--lightestttt-gray);
+body {
+    background: var(--bg-color);
     font-family: "Noto Sans", sans-serif;
-    transition: .4s;
+    transition: all 0.4s linear;
+    min-height: 100vh;
+}
+.hide{
+        display: none;
 }
 
-header{
+header {
     width: 100%;
     margin: 20px auto;
     display: flex;
@@ -59,26 +64,26 @@ header{
     align-items: center;
     padding: 10px 7px;
     border-radius: 10px;
-    box-shadow: 5px 5px 5px var(--dark-gray);
-    border: 1px solid var(--lightest-gray);
+    background-color: var(--header-color);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
-.icon-and-text{
+.icon-text {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 6px;
     position: relative;
 }
-.theme{
+.theme {
     display: flex;
     align-items: center;
     gap: 6px;
     border: 2px solid transparent;
     padding: 10px;
-    background-color: var(--lightest-gray);
+    background-color: var(--theme-icon);
     border-radius: 10px;
     cursor: pointer;
 }
-#extension-list-header{
+#extension-list-header {
     width: 100%;
     margin: 50px auto;
     display: flex;
@@ -87,69 +92,90 @@ header{
     align-items: center;
     padding: 10px 7px;
 }
-#extension-list-header h2{
+#extension-list-header h2 {
     font-size: 1.7rem;
     color: var(--deep-dark-gray);
 }
-.btn{
-    padding: 7px;
+.btn {
+    padding: 10px;
     background-color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: 100px;
     cursor: pointer;
+    font-size: .9rem;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+
 }
-.active{
-    background-color: var(--red-700);
-    color: white;
+.btn:focus{
+    border: 2px solid var(--red);
 }
-#extensions{
+.filter{
+        display: flex;
+        gap: 15px;
+}
+.active {
+    background-color: var(--red);
+    color: var(pure);
+}
+#extensions {
+    display: grid;
     width: 100%;
     margin: 20px auto;
-    display: flex;
-    flex-wrap: wrap;
+    max-width: 85%;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
     justify-content: center;
 }
-.extension{
+.extension {
     border: 1px solid var(--lightest-gray);
+    color: var(--pure);
     width: 100%;
-    max-width: 400px;
-    padding: 10px;
+    padding: 16px;
     display: flex;
     flex-direction: column;
     gap: 50px;
+    background-color: var(--header-color);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.177);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
-.extension-info{
+.extension-info {
     display: flex;
-    gap: 10px;
+    gap: 20px;
+    align-items: center;
 }
-.button-and-toggle{
+.extension-info h3 {
+    font-size: 1.7rem;
+}
+
+.button-and-toggle {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 10px;
 }
-.remove{
-    border: 1px solid var(--dark-gray);
-    border-radius: 20px;
-    padding: 10px ;
+.remove {
+    border: .4px solid var(--lightesttt-gray);
+    border-radius: 9999px;
+    padding: 9px 15px;
+    font-size: 1.1rem;
+    background-color: transparent;
+    color: var(--pure);
 }
 .switch {
     position: relative;
     display: inline-block;
     width: 50px;
     height: 24px;
-  }
-  
-  /* Hide the default checkbox input */
-  .switch input {
+}
+
+.switch input {
     opacity: 0;
     width: 0;
     height: 0;
-  }
-  
-  /* The slider (the circle inside the switch) */
-  .switch .slider {
+}
+
+.switch .slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -159,10 +185,9 @@ header{
     background-color: #ccc;
     transition: 0.4s;
     border-radius: 34px;
-  }
-  
-  /* The circle (the thumb of the toggle) */
-  .switch .slider:before {
+}
+
+.switch .slider:before {
     position: absolute;
     content: "";
     height: 16px;
@@ -172,14 +197,22 @@ header{
     bottom: 4px;
     background-color: white;
     transition: 0.4s;
-  }
-  
-  /* When the checkbox is checked, change the background to green and move the circle */
-  input:checked + .slider {
-    background-color: var(--red-700);
-  }
-  
-  /* When the checkbox is checked, move the circle to the right */
-  input:checked + .slider:before {
+}
+
+input:checked + .slider {
+    background-color: var(--red);
+}
+
+input:checked + .slider:before {
     transform: translateX(26px);
-  }
+}
+@media (max-width: 500px){
+    #extension-list-header {
+        width: 100%;
+        flex-direction: column;
+        display: flex;
+       gap: 15px;
+        justify-content: center;
+        padding: 10px 7px;
+    }
+}
